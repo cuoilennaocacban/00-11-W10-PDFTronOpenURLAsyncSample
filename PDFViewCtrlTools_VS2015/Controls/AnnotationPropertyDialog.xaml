@@ -1,0 +1,75 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.Controls.AnnotationPropertyDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls"
+    xmlns:subviews="using:pdftron.PDF.Tools.Controls.AnnotationPropertiesSubControls"
+    xmlns:common="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:resources="using:pdftron.PDF.Tools.Controls.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="400"
+    d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <common:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+            <common:EnumToStyleConverter x:Key="EnumToStyleConverter" NotMatchedStyle="{StaticResource NonMatchedTabButtonStyle}" MatchedStyle="{StaticResource MatchedTabButtonStyle}"/>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border BorderBrush="Black" Background="#FFEEEEEE" BorderThickness="1" Width="278">
+        <Grid Margin="5" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+                <Grid>
+                    <subviews:Custom Visibility="{Binding ActiveSubView, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Custom}"/>
+                    <subviews:Presets Visibility="{Binding ActiveSubView, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Presets}"/>
+                    <subviews:AddNew Visibility="{Binding ActiveSubView, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=AddNew}"/>
+                </Grid>
+            </ScrollViewer>
+
+            <Border Grid.Row="1" HorizontalAlignment="Stretch" BorderBrush="{StaticResource MatchedTabButtonBackgroundColor}" BorderThickness="0 0 0 0 " Margin="5"
+                    Visibility="{Binding AreSubViewSelectionButtonsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.Resources>
+                        <Style TargetType="Rectangle" BasedOn="{StaticResource ButtonListRectangle}" >
+                            <Setter Property="Fill" Value="{StaticResource MatchedTabButtonBackgroundColor}"/>
+                        </Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonListButton}">
+                        </Style>
+                    </Grid.Resources>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <resources:TabButton Content="Presets%" x:Uid="pdftron_Controls_AnnotationProperties_Presets"
+                                             Command="{Binding PresetOrCustomCommand}" CommandParameter="presets" HorizontalAlignment="Stretch"
+                                             Style="{Binding ActiveSubView, Converter={StaticResource EnumToStyleConverter}, ConverterParameter=Presets}"/>
+                        <Grid Grid.Column="1" Width="20"/>
+                        <resources:TabButton Grid.Column="2" Content="Custom%" x:Uid="pdftron_Controls_AnnotationProperties_Custom"
+                                             Command="{Binding PresetOrCustomCommand}" CommandParameter="custom" HorizontalAlignment="Stretch"
+                                             Style="{Binding ActiveSubView, Converter={StaticResource EnumToStyleConverter}, ConverterParameter=Custom}"/>
+                    </Grid>
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

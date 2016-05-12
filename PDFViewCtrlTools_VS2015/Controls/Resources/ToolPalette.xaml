@@ -1,0 +1,34 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls.Resources">
+
+
+
+    
+    <Color x:Key="PrimaryHighlightBrightColor">#FF27A8E0</Color>
+    <Color x:Key="PrimaryHighlightMediumColor">#FF2189B8</Color>
+    <Color x:Key="PrimaryHighlightDarkColor">#FF21578A</Color>
+    <Color x:Key="PrimaryHighlightSubtleColor">#222189B8</Color>
+    <Color x:Key="PrimaryHighlightVeryDarkColor">#FF082234</Color>
+
+    <Color x:Key="SecondaryHighlightBrightColor">#FFFAAF40</Color>
+    <Color x:Key="SecondaryHighlightMediumColor">#FFF58233</Color>
+    <Color x:Key="SecondaryHighlightDarkColor">#FFF05A2A</Color>
+    <Color x:Key="SecondaryHighlightSubtleColor">#44F58233</Color>
+
+    <SolidColorBrush x:Key="ToolDialogBackgroundBrush" Color="{StaticResource PrimaryHighlightVeryDarkColor}"/>
+
+    <SolidColorBrush x:Key="PrimaryHighlightBrighBrush" Color="{StaticResource PrimaryHighlightBrightColor}"/>
+    <SolidColorBrush x:Key="PrimaryHighlightMediumBrush" Color="{StaticResource PrimaryHighlightMediumColor}"/>
+    <SolidColorBrush x:Key="PrimaryHighlightDarkBrush" Color="{StaticResource PrimaryHighlightDarkColor}"/>
+    <SolidColorBrush x:Key="PrimaryHighlightSubtleBrush" Color="{StaticResource PrimaryHighlightSubtleColor}"/>
+    <SolidColorBrush x:Key="PrimaryHighlightVeryDarkBrush" Color="{StaticResource PrimaryHighlightVeryDarkColor}"/>
+
+    <SolidColorBrush x:Key="SecondaryHighlightBrighBrush" Color="{StaticResource SecondaryHighlightBrightColor}"/>
+    <SolidColorBrush x:Key="SecondaryHighlightMediumBrush" Color="{StaticResource SecondaryHighlightMediumColor}"/>
+    <SolidColorBrush x:Key="SecondaryHighlightDarkBrush" Color="{StaticResource SecondaryHighlightDarkColor}"/>
+    <SolidColorBrush x:Key="SecondaryHighlightSubtleBrush" Color="{StaticResource SecondaryHighlightSubtleColor}"/>
+    
+
+</ResourceDictionary>

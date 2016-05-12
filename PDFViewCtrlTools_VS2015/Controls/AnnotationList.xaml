@@ -1,0 +1,121 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.Controls.AnnotationList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls"
+    xmlns:common="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Name="ListPage">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ControlStyles.xaml"/>
+                <ResourceDictionary Source="Resources/ToolPalette.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <common:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+            
+            <CollectionViewSource x:Name="AnnotationViewSource" IsSourceGrouped="True" 
+                              ItemsPath="Annotations" 
+                              Source="{Binding AnnotationGroups}"/>
+
+            <x:Double x:Key="AnnotItemHeight">50</x:Double>
+
+            <DataTemplate x:Key="AnnotationItemTemplate">
+                <Border HorizontalAlignment="Stretch"
+                    Width="{Binding ElementName=ListPage, Path=ListViewItemWidth}">
+                    <Grid Margin="5 0 15 0" Height="{StaticResource AnnotItemHeight}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontSize="32" Text="{Binding AnnotationSymbol}"
+                               FontFamily="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                        <TextBlock Margin="10 0 0 0" Grid.Column="1"
+                               Text="{Binding AuthorAndContent}" Foreground="White"
+                               HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                               TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                               MaxHeight="{StaticResource AnnotItemHeight}"/>
+
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="AnnotationHeaderTemplate">
+                <Border Height="60">
+                    <TextBlock Text="{Binding PageHeader}" FontSize="30" Foreground="White" FontWeight="SemiLight"/>
+                </Border>
+            </DataTemplate>
+
+            <Style TargetType="TextBlock" x:Key="ErrorMessageTextBlockStyle">
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+            </Style>
+
+            <Storyboard x:Name="FlashTheRectangle">
+                <DoubleAnimationUsingKeyFrames Duration="0:0:0.8"
+                             Storyboard.TargetProperty="Opacity">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <QuadraticEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.4">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <QuadraticEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <QuadraticEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <QuadraticEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource ToolDialogBackgroundBrush}">
+        <ListView ItemsSource="{Binding Source={StaticResource AnnotationViewSource}}"
+                  ItemTemplate="{StaticResource AnnotationItemTemplate}" 
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  ItemClick="AnnotationList_ItemClick"
+                  common:ItemClickCommand.Command="{Binding ItemClickCommand}"
+                  HorizontalContentAlignment="Stretch">
+            <ListView.GroupStyle>
+                <GroupStyle HidesIfEmpty="False" 
+                            HeaderTemplate="{StaticResource AnnotationHeaderTemplate}">
+                </GroupStyle>
+            </ListView.GroupStyle>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ListViewItemPresenter ContentMargin="0" Padding="2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <TextBlock x:Name="NoAnnotationsTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" x:Uid="pdftron_Controls_AnnotationList_NoAnnotations" Text="This document does not contain any annotations." Style="{StaticResource ErrorMessageTextBlockStyle}" Visibility="{Binding FoundAnnotations, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+    </Grid>
+</UserControl>

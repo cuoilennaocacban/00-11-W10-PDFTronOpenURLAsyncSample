@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="pdftron_Tool_CreateOption_Arrow" xml:space="preserve">
+    <value>Arrow</value>
+    <comment>Create an arrow</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_Ellipse" xml:space="preserve">
+    <value>Ellipse</value>
+    <comment>Create an ellipse</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_Ink" xml:space="preserve">
+    <value>Ink</value>
+    <comment>Create an ink annotation</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_Line" xml:space="preserve">
+    <value>Line</value>
+    <comment>Create a line</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_MySignature" xml:space="preserve">
+    <value>My Signature</value>
+    <comment>Add in previously saved signature</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_NewSignature" xml:space="preserve">
+    <value>New Signature</value>
+    <comment>Create a new signature</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_Note" xml:space="preserve">
+    <value>Note</value>
+    <comment>Create a note</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_Rectangle" xml:space="preserve">
+    <value>Rectangle</value>
+    <comment>Create a rectangle</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_Signature" xml:space="preserve">
+    <value>Signature</value>
+    <comment>Create a signature</comment>
+  </data>
+  <data name="pdftron_Tool_CreateOption_Text" xml:space="preserve">
+    <value>Text</value>
+    <comment>Create a text annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditFontSize_Format" xml:space="preserve">
+    <value>{0}</value>
+    <comment>The format for how to display font size</comment>
+  </data>
+  <data name="pdftron_Tool_EditOpacity_Format" xml:space="preserve">
+    <value>{0}%</value>
+    <comment>The suffix behind an opacity option, e.g. 75%</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_Color" xml:space="preserve">
+    <value>Color</value>
+    <comment>Change the color of the annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_CopyToClipboard" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+    <comment>Copies the text behind a Text markup annotation to the clipboard</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_Delete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Deletes the selected annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_Done" xml:space="preserve">
+    <value>Done</value>
+    <comment>Dismisses the popup menu</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_EditText" xml:space="preserve">
+    <value>Edit Text</value>
+    <comment>Edit the text in a free text annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_FillColor" xml:space="preserve">
+    <value>Fill Color</value>
+    <comment>Change the color of the annotation's fill</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_FontSize" xml:space="preserve">
+    <value>Font Size</value>
+    <comment>Change the font size of the text in a free text annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_Note" xml:space="preserve">
+    <value>Note</value>
+    <comment>Adds a note to the selected annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_Opacity" xml:space="preserve">
+    <value>Opacity</value>
+    <comment>Change the opacity of the annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_StrokeColor" xml:space="preserve">
+    <value>Stroke Color</value>
+    <comment>Change the color of the annotation's stroke</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_TextColor" xml:space="preserve">
+    <value>Text Color</value>
+    <comment>Change the color of the text in a free text annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditOption_Thickness" xml:space="preserve">
+    <value>Thickness</value>
+    <comment>Change the thickness of the annotation</comment>
+  </data>
+  <data name="pdftron_Tool_EditThickness_Format" xml:space="preserve">
+    <value>{0} pt</value>
+    <comment>The suffix behind a thickness option, e.g. 5 pt</comment>
+  </data>
+  <data name="pdftron_Tool_PageNumberIndocator_FormatWithoutTotal" xml:space="preserve">
+    <value>{0}</value>
+    <comment>How the page number indicator display current page if we don't want to show the total.</comment>
+  </data>
+  <data name="pdftron_Tool_PageNumberIndocator_FormatWithTotal" xml:space="preserve">
+    <value>{0} of {1}</value>
+    <comment>How the page number indicator displays current page, e.g. 5 of 52</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_AddSignature.Content" xml:space="preserve">
+    <value>Add Signature</value>
+    <comment>Adds the drawn signature to pdf</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Cancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancel button for signature dialog</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Clear.Content" xml:space="preserve">
+    <value>Clear</value>
+    <comment>Clears the content of the dawing area.</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Delete_Info" xml:space="preserve">
+    <value>This will delete the current signature. Are you sure you wish to proceed?</value>
+    <comment>Information notifying the user that they are about to delete the old signature</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Delete_No" xml:space="preserve">
+    <value>No</value>
+    <comment>Cancels the deleting of signature and returns user to signing dialog</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Delete_Title" xml:space="preserve">
+    <value>Delete Signature?</value>
+    <comment>Title of popup asking user to confirm deleting the signature</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Delete_Yes" xml:space="preserve">
+    <value>Yes</value>
+    <comment>Confirm deleting signature</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_MakeDefaultSignature_CheckBox.Content" xml:space="preserve">
+    <value>Make Default Signature</value>
+    <comment>A check box which lets the user select if the signature should be saved for future use.</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Overwrite_Info" xml:space="preserve">
+    <value>Are you sure you want to overwrite the current signature with a new one?</value>
+    <comment>Information notifying the user that they are about to overwrite the old signature</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Overwrite_No" xml:space="preserve">
+    <value>No</value>
+    <comment>Cancels the overwriting and returns user to signing dialog</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Overwrite_Title" xml:space="preserve">
+    <value>Overwrite Signature?</value>
+    <comment>Title of popup asking user to confirm overwriting the currnent signature</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_Overwrite_Yes" xml:space="preserve">
+    <value>Yes</value>
+    <comment>Confirm overwriting signature</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_SignHere.Text" xml:space="preserve">
+    <value>Sign Here</value>
+    <comment>Labels a line the user can sign on</comment>
+  </data>
+  <data name="pdftron_Tool_SignatureDialog_UseMySignature.Content" xml:space="preserve">
+    <value>Use My Signature</value>
+    <comment>An option to use the saved signature instead of creating a new one.</comment>
+  </data>
+  <data name="pdftron_Tool_TextSelect_Option_Copy" xml:space="preserve">
+    <value>Copy</value>
+    <comment>Copy the selected text to clipboard</comment>
+  </data>
+  <data name="pdftron_Tool_TextSelect_Option_Highlight" xml:space="preserve">
+    <value>Highlight</value>
+    <comment>Highlight the selected text</comment>
+  </data>
+  <data name="pdftron_Tool_TextSelect_Option_Squiggly" xml:space="preserve">
+    <value>Squiggly</value>
+    <comment>Add squiggly under the selected text</comment>
+  </data>
+  <data name="pdftron_Tool_TextSelect_Option_Strikeout" xml:space="preserve">
+    <value>Strikeout</value>
+    <comment>Strikeout the selected text</comment>
+  </data>
+  <data name="pdftron_Tool_TextSelect_Option_Underline" xml:space="preserve">
+    <value>Underline</value>
+    <comment>Underline the seelcted text</comment>
+  </data>
+  <data name="pdftron_Tool_ColorPicker_Empty.Text" xml:space="preserve">
+    <value>Empty</value>
+    <comment>The text indicating to not use a color at all. i.e. an empty color.</comment>
+  </data>
+  <data name="pdftron_Tool_ExistingSignatureOptions_Delete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>The option to delete the selected signature</comment>
+  </data>
+  <data name="pdftron_Tool_NoteDialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancels the note entering and discards all changes</comment>
+  </data>
+  <data name="pdftron_Tool_NoteDialog_Save" xml:space="preserve">
+    <value>Save</value>
+    <comment>The option to save the note</comment>
+  </data>
+  <data name="pdftron_Tool_NoteDialog_Title" xml:space="preserve">
+    <value>Note</value>
+    <comment>The title of the popup for entering notes</comment>
+  </data>
+  <data name="pdftron_Controls_AnnotationList_NoAnnotations.Text" xml:space="preserve">
+    <value>This document does not contain any annotations.</value>
+    <comment>Shows up in the annotation list if there document does not have any annotations.</comment>
+  </data>
+  <data name="pdftron_Controls_AnnotToolbar_FreeHandOption_Cancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>The button to cancel ink drawing</comment>
+  </data>
+  <data name="pdftron_Controls_AnnotToolbar_FreeHandOption_Save.Content" xml:space="preserve">
+    <value>Save</value>
+    <comment>The save button for when finished drawing ink</comment>
+  </data>
+  <data name="pdftron_Controls_Outline_NoBookmarks.Text" xml:space="preserve">
+    <value>This document does not contain any bookmarks.</value>
+    <comment>Shows up in the outline dialog if the document does not have any bookmarks.</comment>
+  </data>
+  <data name="pdftron_Tool_Sticky_CancelButton.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="pdftron_Tool_Sticky_OkButton.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="pdftron_Controls_ThumbnailsView_ClearSelection.Content" xml:space="preserve">
+    <value>Clear Selection</value>
+  </data>
+  <data name="pdftron_Controls_ThumbnailsView_Delete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="pdftron_Controls_ThumbnailsView_Exit.Content" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="pdftron_Controls_ThumbnailsView_SelectedLabel.Text" xml:space="preserve">
+    <value>Selected:</value>
+  </data>
+  <data name="pdftron_Tool_EditOption_TextMarkupType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="pdftron_Controls_Thickness_Units" xml:space="preserve">
+    <value>pt</value>
+    <comment>How to label thickness (e.g. 2pt)</comment>
+  </data>
+  <data name="pdftron_Controls_ThumbnailsView_ClearSelectionShort.Content" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="pdftron_Controls_ThumbnailsView_DoneEditing.Content" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="pdftron_Controls_ThumbnailsView_Edit.Content" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="pdftron_Tool_Sticky_DeleteButton.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="pdftron_Controls_AnnotationProperties_Custom.Content" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="pdftron_Controls_AnnotationProperties_Presets.Content" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="pdftron_Tool_EditOptiob_Style" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="pdftron_Controls_DefaultBookmarkFormat" xml:space="preserve">
+    <value>Page {0}</value>
+  </data>
+  <data name="pdftron_Controls_UserBookmarks_Add.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="pdftron_Controls_UserBookmarks_Delete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="pdftron_Controls_UserBookmarks_DoneEditing.Content" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="pdftron_Controls_UserBookmarks_Edit.Content" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="pdftron_Controls_UserBookmarks_Rename.Content" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="pdftron_Controls_AnnotationList_Page" xml:space="preserve">
+    <value>Page {0}</value>
+  </data>
+  <data name="pdftron_Controls_AuthorDialog_CancelButton.Content" xml:space="preserve">
+    <value>Don't Use Author</value>
+  </data>
+  <data name="pdftron_Controls_AuthorDialog_MainInfo.Text" xml:space="preserve">
+    <value>Would you like to add an author name to this and any future annotations? Please enter your name below and select OK. The Author name can be changed at any time in the App's settings dialog.</value>
+  </data>
+  <data name="pdftron_Controls_AuthorDialog_OkButton.Content" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="pdftron_Controls_AuthorDialog_SecondaryInfo.Text" xml:space="preserve">
+    <value>If you select Don't Use Author, you will not be asked about this again.</value>
+  </data>
+  <data name="pdftron_Controls_AuthorDialog_TextInputInfo.Text" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+</root>

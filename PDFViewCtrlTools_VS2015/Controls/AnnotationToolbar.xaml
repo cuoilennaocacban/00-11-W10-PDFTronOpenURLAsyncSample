@@ -1,0 +1,831 @@
+﻿<local:AnnotationToolbarBase
+    x:Class="pdftron.PDF.Tools.Controls.AnnotationToolbar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls"
+    xmlns:common="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:converters="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:resources="using:pdftron.PDF.Tools.Controls.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="70"
+    d:DesignWidth="900">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <common:BooleanToBackgroundColorConverter x:Key="BooleanToBackgroundColorConverter"/>
+            <common:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+            <common:ToolTypeToBooleanConverter x:Key="ToolTypeToBooleanConverter"/>
+
+            <x:Double x:Key="AnnotationToolbarHeight">50</x:Double>
+            <x:Double x:Key="AnnotationToolbarNegativeHeight">-60</x:Double>
+
+            <x:Double x:Key="AnnotationButtonWidth">60</x:Double>
+            <x:Double x:Key="InkToolbarButtonWidth">70</x:Double>
+            
+            <x:Double x:Key="AnnotationButtonFontSize">30</x:Double>
+
+            <x:Double x:Key="AnnotationToolbarSmallScreenHeight">42</x:Double>
+            <x:Double x:Key="AnnotationToolbarSmallScreenNegativeHeight">-42</x:Double>
+
+            <x:Double x:Key="AnnotationButtonSmallScreenWidth">42</x:Double>
+            <x:Double x:Key="InkToolbarButtonSmallScreenWidth">50</x:Double>
+
+            <x:Double x:Key="AnnotationButtonSmallScreenFontSize">26</x:Double>
+
+            <Color x:Key="AnnotationToolbarBackgroundColor">#FFEEEEEE</Color>
+            <Color x:Key="AnnotationToolbarForegroundColor">#FF000000</Color>
+            <Color x:Key="AnnotationToolbarHighlightColor">#FF7088FF</Color>
+            <Color x:Key="AnnotationToolbarDisabledColor">#FFBBBBBB</Color>
+            <Color x:Key="AnnotationToolbarHighlightPoinerOverColor">#FF90A3DD</Color>
+
+            <Style TargetType="local:EntranceAnimationContentControl">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            </Style>
+
+            <SolidColorBrush x:Key="AnnotationToolbarBackgroundBrush" Color="{StaticResource AnnotationToolbarBackgroundColor}"/>
+
+            <SolidColorBrush x:Key="AnnotationButtonBackgroundBrush" Color="{StaticResource AnnotationToolbarBackgroundColor}"/>
+            <SolidColorBrush x:Key="AnnotationButtonForegroundBrush" Color="{StaticResource AnnotationToolbarForegroundColor}"/>
+            <SolidColorBrush x:Key="AnnotationButtonPointerOverBackgroundBrush" Color="#FFCCCCCC"/>
+            <SolidColorBrush x:Key="AnnotationButtonPointerOverForegroundBrush" Color="{StaticResource AnnotationToolbarForegroundColor}"/>
+            <SolidColorBrush x:Key="AnnotationButtonPointerPressedBackgroundBrush" Color="{StaticResource AnnotationToolbarHighlightColor}"/>
+            <SolidColorBrush x:Key="AnnotationButtonPointerPressedForegroundBrush" Color="{StaticResource AnnotationToolbarBackgroundColor}"/>
+            <SolidColorBrush x:Key="AnnotationButtonDisabledBackgroundBrush" Color="{StaticResource AnnotationToolbarBackgroundColor}"/>
+            <SolidColorBrush x:Key="AnnotationButtonDisabledForegroundBrush" Color="{StaticResource AnnotationToolbarDisabledColor}"/>
+            <SolidColorBrush x:Key="AnnotationButtonHighlightedBrush" Color="{StaticResource AnnotationToolbarHighlightColor}"/>
+            <SolidColorBrush x:Key="AnnotationToolbarHighlightPointerOverBrush" Color="{StaticResource AnnotationToolbarHighlightPoinerOverColor}"/>
+
+            <Style TargetType="resources:TabButton" x:Key="NotSelectedTabButtonStyle" BasedOn="{StaticResource NonMatchedTabButtonStyle}">
+                <Setter Property="Background" Value="{StaticResource AnnotationButtonBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource AnnotationButtonForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AnnotationButtonForegroundBrush}" />
+                <Setter Property="PointerOverBackgroundBrush" Value="{StaticResource AnnotationButtonPointerOverBackgroundBrush}"/>
+                <Setter Property="PointerOverForegroundBrush" Value="{StaticResource AnnotationButtonPointerOverForegroundBrush}"/>
+                <Setter Property="PointerPressedBackgroundBrush" Value="{StaticResource AnnotationButtonPointerPressedBackgroundBrush}"/>
+                <Setter Property="PointerPressedForegroundBrush" Value="{StaticResource AnnotationButtonPointerPressedForegroundBrush}"/>
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="-1" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="FontFamily" Value="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons"/>
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="FontSize" Value="{StaticResource AnnotationButtonFontSize}"/>
+                <Setter Property="MinWidth" Value="10"/>
+                <Setter Property="MinHeight" Value="10"/>
+            </Style>
+
+            <Style TargetType="resources:TabButton" x:Key="SelectedTabButtonStyle" BasedOn="{StaticResource NotSelectedTabButtonStyle}">
+                <Setter Property="Background" Value="{StaticResource AnnotationButtonHighlightedBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource AnnotationButtonForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AnnotationButtonForegroundBrush}" />
+                <Setter Property="PointerOverBackgroundBrush" Value="{StaticResource AnnotationToolbarHighlightPointerOverBrush}"/>
+                <Setter Property="PointerOverForegroundBrush" Value="{StaticResource AnnotationButtonPointerOverForegroundBrush}"/>
+                <Setter Property="PointerPressedBackgroundBrush" Value="{StaticResource AnnotationButtonHighlightedBrush}"/>
+                <Setter Property="PointerPressedForegroundBrush" Value="{StaticResource AnnotationButtonPointerPressedForegroundBrush}"/>
+            </Style>
+
+            <Style TargetType="resources:TabButton" x:Key="SelectedTabButtonStyleWithIndicator" BasedOn="{StaticResource SelectedTabButtonStyle}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="resources:TabButton">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerOverBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PropertiesIndicator"
+                                                                   Storyboard.TargetProperty="Fill">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerPressedBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerPressedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerPressedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PropertiesIndicator"
+                                                                   Storyboard.TargetProperty="Fill">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerPressedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TabButtonDisabledForegroundColor}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TabButtonDisabledForegroundColor}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused" />
+                                        <VisualState x:Name="PointerFocused" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding Foreground}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="0">
+                                    <Grid>
+                                        <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          AutomationProperties.AccessibilityView="Raw"/>
+                                        <Path x:Name="PropertiesIndicator" StrokeThickness="0" Data="M 0,15 L 15,15 L 15,0" StrokeLineJoin="Miter" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3"/>
+                                    </Grid>
+                                </Border>
+                                <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                                <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <converters:EnumToStyleConverter x:Key="EnumToStyleConverterWithoutProperties" NotMatchedStyle="{StaticResource NotSelectedTabButtonStyle}" MatchedStyle="{StaticResource SelectedTabButtonStyle}"/>
+            <converters:EnumToStyleConverter x:Key="EnumToStyleConverterWithProperties" NotMatchedStyle="{StaticResource NotSelectedTabButtonStyle}" MatchedStyle="{StaticResource SelectedTabButtonStyleWithIndicator}"/>
+
+            <Style TargetType="resources:TabButton" BasedOn="{StaticResource NonMatchedTabButtonStyle}"/>
+            
+            <!-- Style for annotation toolbar buttons -->
+            <Style TargetType="Button" x:Key="AnnotationToolbarButtonStyle">
+                <Setter Property="Background" Value="{StaticResource AnnotationButtonBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource AnnotationButtonForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AnnotationButtonForegroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="FontFamily" Value="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons"/>
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="FontSize" Value="{StaticResource AnnotationButtonFontSize}"/>
+                <Setter Property="MinWidth" Value="10"/>
+                <Setter Property="MinHeight" Value="10"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerOverBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerPressedBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerPressedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonDisabledBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonDisabledForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonDisabledForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused" />
+                                        <VisualState x:Name="PointerFocused" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+
+
+                                <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="0"
+                            Padding="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+
+                                    <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" >
+                                    </ContentPresenter>
+                                </Border>
+                                <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                                <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <Style TargetType="ToggleButton">
+                <Setter Property="Background" Value="{StaticResource AnnotationButtonBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource AnnotationButtonForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AnnotationButtonForegroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="FontFamily" Value="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons"/>
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="FontSize" Value="{StaticResource AnnotationButtonFontSize}"/>
+                <Setter Property="MinWidth" Value="10"/>
+                <Setter Property="MinHeight" Value="10"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerOverBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerPressedBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerPressedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonDisabledBorderThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonDisabledForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonHighlightedBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationToolbarHighlightPointerOverBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonHighlightedBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerPressedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedDisabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonHighlightedBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Indeterminate" />
+                                        <VisualState x:Name="IndeterminatePointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonPointerOverBackgroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="IndeterminatePressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonPressedBackgroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonPressedForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="IndeterminateDisabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonDisabledBorderThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonDisabledForegroundThemeBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused" />
+                                        <VisualState x:Name="PointerFocused" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="0"
+                            Padding="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+
+                                    <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" >
+                                    </ContentPresenter>
+                                </Border>
+                                <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                                <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+
+            <Style TargetType="Button" x:Key="InkToolbarButtonStyle">
+                <Setter Property="Background" Value="{StaticResource AnnotationButtonBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource AnnotationButtonForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AnnotationButtonForegroundBrush}" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="5 0 5 0" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}" />
+                <Setter Property="MinHeight" Value="10"/>
+                <Setter Property="MinWidth" Value="10"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerOverBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerPressedBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonPointerPressedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF888888" />
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonDisabledForegroundBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AnnotationButtonDisabledForegroundBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledWhiteoutRect"
+                                                                   Storyboard.TargetProperty="Visibility">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused" />
+                                        <VisualState x:Name="PointerFocused" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="0"
+                            Padding="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+
+                                    <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" >
+                                    </ContentPresenter>
+                                </Border>
+                                <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                                <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
+                                <Rectangle x:Name="DisabledWhiteoutRect"
+                               IsHitTestVisible="False"
+                               Fill="{StaticResource AnnotationToolbarBackgroundBrush}"
+                               Opacity="0.8"
+                               Visibility="Collapsed"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Storyboard x:Name="FadeInToolbar">
+                <DoubleAnimation Duration="0:0:0.350" Storyboard.TargetName="MainToolbar" 
+                             Storyboard.TargetProperty="Opacity" To="1">
+                    <DoubleAnimation.EasingFunction>
+                        <QuarticEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+
+            <Storyboard x:Name="FadeOutToolbar">
+                <DoubleAnimation Duration="0:0:0.500" Storyboard.TargetName="MainToolbar" 
+                             Storyboard.TargetProperty="Opacity" To="0">
+                </DoubleAnimation>
+            </Storyboard>
+
+            <Storyboard x:Name="SlideInInkToolbar">
+                <DoubleAnimation x:Name="SlideInAnimation" Duration="0:0:0.350" Storyboard.TargetName="InkToolbarTranslate" 
+                             Storyboard.TargetProperty="Y" To="0">
+                    <DoubleAnimation.EasingFunction>
+                        <QuarticEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+
+            <Storyboard x:Name="SlideOutInkToolbar">
+                <DoubleAnimation x:Name="SlideOutAnimation" Duration="0:0:0.150" Storyboard.TargetName="InkToolbarTranslate" 
+                             Storyboard.TargetProperty="Y" To="-100">
+                    <DoubleAnimation.EasingFunction>
+                        <QuarticEase EasingMode="EaseIn"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <!--IsOpen="{Binding ShowInkToolbar, Converter={StaticResource InverseBooleanConverter}}"-->
+    <!--IsOpen="{Binding ShowMainToolbar}"-->
+
+    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Background="{StaticResource AnnotationToolbarBackgroundBrush}">
+        <Grid x:Name="ContentPanel" Height="{StaticResource AnnotationToolbarHeight}">
+            <local:EntranceAnimationContentControl x:Name="MainToolbar" HorizontalAlignment="Stretch" 
+                                                   VerticalAlignment="Top"
+                                                   EntranceAnimation="{Binding ElementName=FadeInToolbar, Mode=TwoWay}"
+                                                   ExitAnimation="{Binding ElementName=FadeOutToolbar, Mode=TwoWay}"
+                                                   IsOpen="{Binding ShowInkToolbar, Converter={StaticResource InverseBooleanConverter}}"
+                                                   Visibility="Visible"
+                                                      >
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource AnnotationToolbarButtonStyle}"/>
+                        <Style TargetType="resources:TabButton" BasedOn="{StaticResource NotSelectedTabButtonStyle}"/>
+                    </Grid.Resources>
+                    <StackPanel Orientation="Horizontal" x:Name="ToolbarButtonMainStack" VerticalAlignment="Stretch">
+                        <resources:TabButton x:Name="AnnotStickyNoteButton" Tag="sticky" Content="&#xE310;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithoutProperties}, ConverterParameter=e_sticky_note_create}"/>
+                        <resources:TabButton x:Name="AnnotHighlightButton" Tag="highlight" Padding="0 0 7 0" Content="&#x0057;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_text_highlight}"/>
+                        <resources:TabButton x:Name="AnnotUnderlineButton" Tag="underline" Content="&#xE104;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_text_underline}"/>
+                        <resources:TabButton x:Name="AnnotStrikeoutButton" Tag="strikeout" Content="&#xE105;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_text_strikeout}"/>
+                        <resources:TabButton x:Name="AnnotSquigglyButton" Tag="squiggly" Content="&#x0070;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_text_squiggly}"/>
+                        <resources:TabButton x:Name="AnnotSignatureButton" Tag="signature" Content="&#x004D;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithoutProperties}, ConverterParameter=e_signature}"/>
+                        <resources:TabButton x:Name="AnnotFreeHandButton" Tag="Ink" Content="&#xE235;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithoutProperties}, ConverterParameter=e_ink_create}"/>
+                        <resources:TabButton x:Name="AnnotEraserButton" Tag="eraser" Content="&#x004B;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithoutProperties}, ConverterParameter=e_ink_eraser}"/>
+                        <resources:TabButton x:Name="AnnotFreeTextButton" Tag="TextBox" Content="&#x0050;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_text_annot_create}"/>
+                        <resources:TabButton x:Name="AnnotArrowButton" Tag="arrow" Content="&#x006F;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_arrow_create}"/>
+                        <resources:TabButton x:Name="AnnotLineButton" Tag="line" Content="&#xE098;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_line_create}"/>
+                        <resources:TabButton x:Name="AnnotSquareButton" Tag="square" Content="&#xE095;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_rect_create}"/>
+                        <resources:TabButton x:Name="AnnotCircleButton" Tag="oval" Content="&#xE096;"
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=e_oval_create}"/>
+                        <resources:TabButton x:Name="AnnotPanButton" Tag="pan" Content="&#x0043;" 
+                                             Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" 
+                                             Style="{Binding CurrentTool, Converter={StaticResource EnumToStyleConverterWithoutProperties}, ConverterParameter=e_pan}"/>
+                                             
+                                             
+                            <!--IsChecked="{Binding CurrentTool, Converter={StaticResource ToolTypeToBooleanConverter}, ConverterParameter=e_pan, Mode=TwoWay}"
+                            IsEnabled="{Binding PanSelected, Converter={StaticResource InverseBooleanConverter}}"/>-->
+                        <resources:TabButton x:Name="ToolbarCloseButton" Tag="close" Content="&#xE208;" 
+                            Command="{Binding ToolButtonClickedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    </StackPanel>
+                </Grid>
+            </local:EntranceAnimationContentControl>
+            <local:EntranceAnimationContentControl x:Name="InkHost" HorizontalAlignment="Stretch" 
+                                                   VerticalAlignment="Top" IsOpen="{Binding ShowInkToolbar}"  
+                                                   EntranceAnimation="{Binding ElementName=SlideInInkToolbar, Mode=TwoWay}"
+                                                   ExitAnimation="{Binding ElementName=SlideOutInkToolbar, Mode=TwoWay}"
+                                                   Visibility="Visible"
+                                                      >
+                <local:EntranceAnimationContentControl.RenderTransform>
+                    <TranslateTransform x:Name="InkToolbarTranslate" Y="-100"/>
+                </local:EntranceAnimationContentControl.RenderTransform>
+                <Grid x:Name="InkToolbar" Opacity="1" Background="{StaticResource AnnotationButtonBackgroundBrush}">
+                    <Grid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource InkToolbarButtonStyle}"/>
+                        <Style TargetType="resources:TabButton" BasedOn="{StaticResource NotSelectedTabButtonStyle}"/>
+                    </Grid.Resources>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="{StaticResource AnnotationButtonFontSize}"/>
+                                <Setter Property="FontFamily" Value="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons"/>
+                                <Setter Property="FontWeight" Value="Light"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="IsHitTestVisible" Value="False"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button x:Name="CancelButton" x:Uid="pdftron_Controls_AnnotToolbar_FreeHandOption_Cancel" Content="Cancel"
+                            BorderThickness="0" VerticalAlignment="Stretch"
+                            MinWidth="10"
+                            Command="{Binding InkToolbarCommand}" CommandParameter="C"/>
+                        <Grid Width="10"/>
+                        <Grid x:Name="InkButtonGrid0">
+                            <resources:TabButton x:Name="InkButton0" Tag="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                    Command="{Binding InkPresetButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Style="{Binding CurrentPresetLabel, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=0}"/>
+                            <TextBlock x:Name="InkSymbol0" Text="&#xE235;" Foreground="{Binding PresetBrush0}" />
+                        </Grid>
+                        <Grid x:Name="InkButtonGrid1">
+                            <resources:TabButton x:Name="InkButton1" Tag="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                    Command="{Binding InkPresetButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Style="{Binding CurrentPresetLabel, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=1}"/>
+                            <TextBlock x:Name="InkSymbol1" Text="&#xE235;" Foreground="{Binding PresetBrush1}" />
+                        </Grid>
+                        <Grid x:Name="InkButtonGrid2">
+                            <resources:TabButton x:Name="InkButton2" Tag="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                    Command="{Binding InkPresetButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Style="{Binding CurrentPresetLabel, Converter={StaticResource EnumToStyleConverterWithProperties}, ConverterParameter=2}"/>
+                            <TextBlock x:Name="InkSymbol2" Text="&#xE235;" Foreground="{Binding PresetBrush2}" />
+                        </Grid>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="InkUndoButton" IsEnabled="{Binding CanSaveInk}"
+                            Width="{StaticResource InkToolbarButtonWidth}" 
+                            Command="{Binding InkToolbarCommand}" CommandParameter="U" Content="&#xE222;" FontSize="{StaticResource AnnotationButtonFontSize}" FontWeight="Light"
+                            FontFamily="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons"/>
+                        <Button x:Name="InkRedoButton" IsEnabled="{Binding CanRedoInk}"
+                            Width="{StaticResource InkToolbarButtonWidth}"
+                            Command="{Binding InkToolbarCommand}" CommandParameter="R" Content="&#xE223;" FontSize="{StaticResource AnnotationButtonFontSize}" FontWeight="Light"
+                            FontFamily="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons"/>
+                        <Button x:Name="InkSaveButton" x:Uid="pdftron_Controls_AnnotToolbar_FreeHandOption_Save" 
+                                IsEnabled="{Binding CanSaveInk}" Content="Save"
+                            BorderThickness="0" VerticalAlignment="Stretch"
+                            MinWidth="{StaticResource InkToolbarButtonWidth}"
+                            Command="{Binding InkToolbarCommand}" CommandParameter="S"/>
+                    </StackPanel>
+                </Grid>
+            </local:EntranceAnimationContentControl>
+        </Grid>
+    </Border>
+</local:AnnotationToolbarBase>

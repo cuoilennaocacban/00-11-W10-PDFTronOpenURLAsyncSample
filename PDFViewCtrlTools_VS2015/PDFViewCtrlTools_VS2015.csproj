@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25F47CBA-47F3-4011-AFA7-CE8D9B704648}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>pdftron.PDF.Tools</RootNamespace>
+    <AssemblyName>pdftron.PDF.Tools</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AnnotEdit.cs" />
+    <Compile Include="ArrowCreate.cs" />
+    <Compile Include="Controls\AnnotationList.xaml.cs">
+      <DependentUpon>AnnotationList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\AddNew.xaml.cs">
+      <DependentUpon>AddNew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\AnnotationPreviewControl.xaml.cs">
+      <DependentUpon>AnnotationPreviewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\ButtonControl.xaml.cs">
+      <DependentUpon>ButtonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\Custom.xaml.cs">
+      <DependentUpon>Custom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\CustomColorGrid.xaml.cs">
+      <DependentUpon>CustomColorGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\PresetColorGrid.xaml.cs">
+      <DependentUpon>PresetColorGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\Presets.xaml.cs">
+      <DependentUpon>Presets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertiesSubControls\SliderControl.xaml.cs">
+      <DependentUpon>SliderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationPropertyDialog.xaml.cs">
+      <DependentUpon>AnnotationPropertyDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnnotationToolbar.xaml.cs">
+      <DependentUpon>AnnotationToolbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AuthorInputDialog.xaml.cs">
+      <DependentUpon>AuthorInputDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClickablePageNumberIndicator.xaml.cs">
+      <DependentUpon>ClickablePageNumberIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlBase\AnnotationToolbarBase.cs" />
+    <Compile Include="Controls\ControlBase\IAuthorDialog.cs" />
+    <Compile Include="Controls\ControlBase\ICloseableControl.cs" />
+    <Compile Include="Controls\Outline.xaml.cs">
+      <DependentUpon>Outline.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OutlinePartial.cs" />
+    <Compile Include="Controls\Resources\CheckerGrid.cs" />
+    <Compile Include="Controls\Resources\TabButton.cs" />
+    <Compile Include="Controls\TextHighlighter.cs" />
+    <Compile Include="Controls\ThumbnailSlider.xaml.cs">
+      <DependentUpon>ThumbnailSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ThumbnailsView.xaml.cs">
+      <DependentUpon>ThumbnailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserBookmarkControl.xaml.cs">
+      <DependentUpon>UserBookmarkControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserBookmarksPartial.cs" />
+    <Compile Include="Controls\Utilities\EntranceAnimationContentControl.cs" />
+    <Compile Include="Controls\Utilities\ResourceHandler.cs" />
+    <Compile Include="Controls\ViewModels\AnnotationListViewModel.cs" />
+    <Compile Include="Controls\ViewModels\AnnotationPropertiesViewModel.cs" />
+    <Compile Include="Controls\ViewModels\AnnotationToolbarViewModel.cs" />
+    <Compile Include="Controls\ViewModels\AuthorDialogViewModel.cs" />
+    <Compile Include="Controls\ViewModels\ClickablePageNumberIndicatorViewModel.cs" />
+    <Compile Include="Controls\ViewModels\Common\Converters.cs" />
+    <Compile Include="Controls\ViewModels\Common\RelayCommand.cs" />
+    <Compile Include="Controls\ViewModels\Common\SizeObserver.cs" />
+    <Compile Include="Controls\ViewModels\Common\ViewModelBase.cs" />
+    <Compile Include="Controls\ViewModels\ThumbnailsViewViewModel.cs" />
+    <Compile Include="Controls\ViewModels\UserBookmarksViewModel.cs" />
+    <Compile Include="Eraser.cs" />
+    <Compile Include="FormFill.cs" />
+    <Compile Include="FreehandCreate.cs" />
+    <Compile Include="FreeTextCreate.cs" />
+    <Compile Include="LineCreate.cs" />
+    <Compile Include="LineEdit.cs" />
+    <Compile Include="LinkAction.cs" />
+    <Compile Include="OvalCreate.cs" />
+    <Compile Include="Pan.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RectCreate.cs" />
+    <Compile Include="RichMedia.cs" />
+    <Compile Include="Signature.cs" />
+    <Compile Include="SimpleShapeCreate.cs" />
+    <Compile Include="StickyNoteCreate.cs" />
+    <Compile Include="TextHightlightCreate.cs" />
+    <Compile Include="TextMarkupCreate.cs" />
+    <Compile Include="TextMarkupEdit.cs" />
+    <Compile Include="TextSelect.cs" />
+    <Compile Include="TextSquigglyCreate.cs" />
+    <Compile Include="TextStrikeoutCreate.cs" />
+    <Compile Include="TextUnderlineCreate.cs" />
+    <Compile Include="Tool.cs" />
+    <Compile Include="ToolManager.cs" />
+    <Compile Include="Utilities\AnalyticsHandlerBase.cs" />
+    <Compile Include="Utilities\Base\NoteDialogBase.cs" />
+    <Compile Include="Utilities\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ColorPickerSimple.xaml.cs">
+      <DependentUpon>ColorPickerSimple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\DelayRemoveTimer.cs" />
+    <Compile Include="Utilities\FixedSizedBoxPopup.cs" />
+    <Compile Include="Utilities\NoteDialogPhone.xaml.cs">
+      <DependentUpon>NoteDialogPhone.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\NoteDialogWindows.xaml.cs">
+      <DependentUpon>NoteDialogWindows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PageNumberIndicator.xaml.cs">
+      <DependentUpon>PageNumberIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PopupCommandMenubuttonHost.xaml.cs">
+      <DependentUpon>PopupCommandMenubuttonHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PopupCommandMenuWinRT.cs" />
+    <Compile Include="Utilities\ResourceHandler.cs" />
+    <Compile Include="Utilities\Settings.cs" />
+    <Compile Include="Utilities\SignatureDialog.xaml.cs">
+      <DependentUpon>SignatureDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\StampManager.cs" />
+    <Compile Include="Utilities\UtilityFunctions.cs" />
+    <Compile Include="Utilities\VirtualKeyboardHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\Resources\custom.ttf" />
+    <PRIResource Include="strings\en-US\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Microsoft Visual C++ 2015 Runtime Package for Windows Universal</Name>
+    </SDKReference>
+    <SDKReference Include="PDFTron.PDFNetWindows10Universal, Version=6.5.3.42683">
+      <Name>PDFNet for Windows 10 Universal Apps</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\AnnotationList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\AddNew.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\AnnotationPreviewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\ButtonControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\Custom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\CustomColorGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\PresetColorGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\Presets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertiesSubControls\SliderControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationPropertyDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnnotationToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AuthorInputDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ClickablePageNumberIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Outline.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Resources\ControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Resources\ToolPalette.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ThumbnailSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ThumbnailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserBookmarkControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utilities\ColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utilities\ColorPickerSimple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utilities\NoteDialogPhone.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utilities\NoteDialogWindows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utilities\PageNumberIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utilities\PopupCommandMenubuttonHost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utilities\SignatureDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+    <PRIResource Include="strings\en-US\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\Resources\DefaultFileIcon.png" />
+    <Content Include="Icons\PopupIcon.png" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

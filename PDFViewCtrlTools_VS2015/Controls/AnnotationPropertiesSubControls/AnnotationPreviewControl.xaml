@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.Controls.AnnotationPropertiesSubControls.AnnotationPreviewControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls.AnnotationPropertiesSubControls"
+    xmlns:converters="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <UserControl.Resources>
+        <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+        <converters:DoubleToThicknessConverter x:Key="DoubleToThicknessConverter"/>        
+        <x:Double x:Key="ItemSize">44</x:Double>
+        <CornerRadius x:Key="EllipseCornerRadius">22</CornerRadius>
+        
+    </UserControl.Resources>
+
+    <Grid Width="50" VerticalAlignment="Center">
+        <Grid Opacity="{Binding Opacity}">
+            <Rectangle Width="{StaticResource ItemSize}" Height="{Binding Thickness}" Fill="{Binding PrimaryBrush}" 
+                       Visibility="{Binding PreviewType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=HorizontalLine}"/>
+            <Path Stroke="{Binding PrimaryBrush}" StrokeThickness="{Binding Thickness}" Data="M 10,40 40,10"
+                  Visibility="{Binding PreviewType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=DiagonalLine}"/>
+            <Border Width="{StaticResource ItemSize}" Height="{StaticResource ItemSize}" BorderBrush="{Binding PrimaryBrush}" 
+                    BorderThickness="{Binding Thickness, Converter={StaticResource DoubleToThicknessConverter}}" 
+                    Background="{Binding SecondaryBrush}"
+                    Visibility="{Binding PreviewType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Rectangle}"/>
+            <Border Width="{StaticResource ItemSize}" Height="{StaticResource ItemSize}" BorderBrush="{Binding PrimaryBrush}" 
+                    BorderThickness="{Binding Thickness, Converter={StaticResource DoubleToThicknessConverter}}" 
+                    Background="{Binding SecondaryBrush}" CornerRadius="{StaticResource EllipseCornerRadius}"
+                    Visibility="{Binding PreviewType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Ellipse}"/>
+            <Path Stroke="{Binding PrimaryBrush}" StrokeThickness="{Binding Thickness}" Data="M 10,28 C 22,10 28,40 40,22" HorizontalAlignment="Center" 
+                  StrokeEndLineCap="Round" StrokeStartLineCap="Round"
+                  Visibility="{Binding PreviewType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=CurvedLine}"/>
+            <Grid Width="{StaticResource ItemSize}" Height="{StaticResource ItemSize}" Background="{Binding SecondaryBrush}"
+                Visibility="{Binding PreviewType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=Text}">
+                <Grid.Clip>
+                    <RectangleGeometry Rect="0 0 50 50"/>
+                </Grid.Clip>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{Binding PrimaryBrush}" FontSize="{Binding FontSize}" Text="Aa"/>
+            </Grid>
+        </Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+              Visibility="{Binding PreviewType, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=HighlightedText}">
+            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{Binding PrimaryBrush}" Opacity="{Binding Opacity}"/>
+            <TextBlock Foreground="Black" Text="Aa" FontSize="24" Margin="0 -4 0 -5"/>
+        </Grid>
+        
+    </Grid>
+</UserControl>

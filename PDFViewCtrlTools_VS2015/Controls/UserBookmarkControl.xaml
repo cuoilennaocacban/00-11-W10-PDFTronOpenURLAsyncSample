@@ -1,0 +1,266 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.Controls.UserBookmarkControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls"
+    xmlns:converters="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:common="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="360">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ControlStyles.xaml"/>
+                <ResourceDictionary Source="Resources/ToolPalette.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter"/>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+            <converters:NotNullToBooleanConverter x:Key="NotNullToBooleanConverter"/>
+
+            <x:Double x:Key="BookmarksPanelWidth">360</x:Double>
+            <x:Double x:Key="BookmarksItemWidth">340</x:Double>
+            <x:Double x:Key="BookmarksItemHeight">50</x:Double>
+
+            <Color x:Key="BookmarkDialogForegroundColor">#FFFFFFFF</Color>
+            <Color x:Key="BookmarkDialogHighlightColor">#FF7088FF</Color>
+
+            <SolidColorBrush x:Key="BookmarkDialogForegroundBrush" Color="{StaticResource BookmarkDialogForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogHighlightBrush" Color="{StaticResource BookmarkDialogHighlightColor}"/>
+
+            <DataTemplate x:Key="BookmarkTemplate">
+                <Border Height="{StaticResource BookmarksItemHeight}" Width="{StaticResource BookmarksItemWidth}" Background="Transparent" 
+                        BorderBrush="{StaticResource BookmarkDialogForegroundBrush}">
+                    <Grid Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookmarkName}" FontSize="20" Foreground="{StaticResource BookmarkDialogForegroundBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBox Opacity="{Binding IsEditing, Converter={StaticResource BooleanToOpacityConverter}}" Text="{Binding BookmarkName, Mode=TwoWay}" IsHitTestVisible="{Binding IsEditing}" IsEnabled="{Binding IsEditing}" Margin="0"/>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <Color x:Key="BookmarkDialogButtonBackgroundColor">Transparent</Color>
+            <Color x:Key="BookmarkDialogButtonPointerOverForegroundColor">#FFFFFFFF</Color>
+            <Color x:Key="BookmarkDialogButtonPointerOverBackgroundColor">#44FFFFFF</Color>
+            <Color x:Key="BookmarkDialogButtonPointerPressedForegroundColor">#FF000000</Color>
+            <Color x:Key="BookmarkDialogButtonPointerPressedBackgroundColor">#FF000000</Color>
+            <Color x:Key="BookmarkDialogButtonDisabledForegroundColor">#FFAAAAAA</Color>
+            <Color x:Key="BookmarkDialogButtonDisabledBackgroundColor">Transparent</Color>
+
+
+            <SolidColorBrush x:Key="BookmarkDialogButtonForegroundBrush" Color="{StaticResource BookmarkDialogForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonBackgroundBrush" Color="{StaticResource BookmarkDialogButtonBackgroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonBorderBrush" Color="{StaticResource BookmarkDialogForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonPointerOverForegroundBrush" Color="{StaticResource BookmarkDialogForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonPointerOverBackgroundBrush" Color="{StaticResource BookmarkDialogButtonPointerOverBackgroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonPointerOverBorderBrush" Color="{StaticResource BookmarkDialogForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonPointerPresssedForegroundBrush" Color="{StaticResource PrimaryHighlightDarkColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonPointerPresssedBackgroundBrush" Color="{StaticResource BookmarkDialogForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonPointerPresssedBorderBrush" Color="{StaticResource BookmarkDialogForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonDisabledForegroundBrush" Color="{StaticResource BookmarkDialogButtonDisabledForegroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonDisabledBackgroundBrush" Color="{StaticResource BookmarkDialogButtonDisabledBackgroundColor}"/>
+            <SolidColorBrush x:Key="BookmarkDialogButtonDisabledBorderBrush" Color="{StaticResource BookmarkDialogButtonDisabledForegroundColor}"/>
+
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource BookmarkDialogButtonBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource BookmarkDialogButtonForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BookmarkDialogButtonForegroundBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
+                <Setter Property="Padding" Value="12,4,12,4" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+                <Setter Property="MinWidth" Value="100"/>
+                <Setter Property="MinHeight" Value="40"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonPointerOverBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonPointerOverBorderBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonPointerOverForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonPointerPresssedBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonPointerPresssedBorderBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonPointerPresssedForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonDisabledBackgroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonDisabledBorderBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BookmarkDialogButtonDisabledForegroundBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused" />
+                                        <VisualState x:Name="PointerFocused" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="3">
+                                    <ContentPresenter x:Name="ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          AutomationProperties.AccessibilityView="Raw"/>
+                                </Border>
+                                <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                                <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource ToolDialogBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+
+        <!-- 
+            CanReorderItems="{Binding IsInEditMode}"
+            CanDragItems="{Binding IsInEditMode}"
+            AllowDrop="{Binding IsInEditMode}"
+        -->
+
+        <!--<Border Grid.Row="1"  Height="{StaticResource BookmarksItemHeight}" Width="{StaticResource BookmarksItemWidth}" Background="Transparent" 
+                        BorderBrush="{StaticResource BookmarkDialogForegroundBrush}">
+            <Grid Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBox Opacity="1" Text="Sample" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
+            </Grid>
+        </Border>-->
+
+        <!-- ItemContainerStyle="{StaticResource UserBookmarkListViewItemStyle}" -->
+        <ListView x:Name="BookmarksListView"
+            Grid.Row="1"
+            ItemTemplate="{StaticResource BookmarkTemplate}"
+            
+            ItemsSource="{Binding BookmarkList, Mode=TwoWay}"
+            CanReorderItems="True"
+            CanDragItems="True"
+            AllowDrop="True"
+            SelectionMode="{Binding SelectionMode}"
+            SelectedItem="{Binding SelectedBookmark, Mode=TwoWay}"
+            IsItemClickEnabled="{Binding IsInEditMode, Converter={StaticResource InverseBooleanConverter}}"
+            common:ItemClickCommand.Command="{Binding ListViewItemClickCommand}"
+            >
+            <ListView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromHorizontalOffset="20"/>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+
+            </ListView.ItemContainerTransitions>
+        </ListView>
+
+        <Border Grid.Row="0" Margin="0 10 0 0">
+            <Grid MinHeight="20">
+                <Grid x:Name="MainControlGrid" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button Content="Edit%" x:Uid="pdftron_Controls_UserBookmarks_Edit" Command="{Binding EditBookmarksCommand}" 
+                                IsEnabled="{Binding ListHasItems}"/>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                        <Button Content="Add%" x:Uid="pdftron_Controls_UserBookmarks_Add" Command="{Binding AddBookmarkCommand}"/>
+                    </StackPanel>
+                </Grid>
+
+
+                <Grid x:Name="EditControlGrid" Visibility="{Binding IsInEditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                        <Button Content="Done%" x:Uid="pdftron_Controls_UserBookmarks_DoneEditing" Command="{Binding DoneEditingCommand}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                        <Button Content="Rename%" x:Uid="pdftron_Controls_UserBookmarks_Rename"
+                                Command="{Binding RenameBookmarkCommand}" IsEnabled="{Binding CanRenameItem}"/>
+                        <Button Content="Delete%" x:Uid="pdftron_Controls_UserBookmarks_Delete" 
+                                IsEnabled="{Binding SelectedBookmark, Converter={StaticResource NotNullToBooleanConverter}}" 
+                                Command="{Binding RemoveBookmarkCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

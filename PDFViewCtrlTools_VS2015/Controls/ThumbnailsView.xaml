@@ -1,0 +1,125 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.Controls.ThumbnailViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls"
+    xmlns:converters="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:common="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="700">
+    
+    <UserControl.Resources>
+        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+            <x:Double x:Key="ThumbnailItemWidthLarge">180</x:Double>
+            <x:Double x:Key="ThumbnailItemHeightLarge">250</x:Double>
+            <x:Double x:Key="ThumbnailItemWidthSmall">100</x:Double>
+            <x:Double x:Key="ThumbnailItemHeightSmall">140</x:Double>
+
+            <DataTemplate x:Key="ThumbnailTemplateLarge">
+                <Border Height="{StaticResource ThumbnailItemHeightLarge}" Width="{StaticResource ThumbnailItemWidthLarge}" Background="Transparent" >
+                    <Grid Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7 5 7 10" Width="120" Height="170" Fill="{Binding DefaultBackground}"
+                            Visibility="{Binding HasThumbnail, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" Margin="0 0 0 10" Source="{Binding Thumbnail}"/>
+                        <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="#DD666666" BorderBrush="White" BorderThickness="0">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5 10 5" Foreground="White" FontSize="20" Text="{Binding PageNumber}"/>
+                        </Border>
+                        <Path StrokeThickness="1" Fill="#FF21578A" Stroke="White" StrokeLineJoin="Miter" Data="M 18,0 L 18,30 L 9,39 L 0,30 L 0,0"
+                          HorizontalAlignment="Right" Margin="0 0 10 0" Visibility="{Binding IsCurrentPage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ThumbnailTemplateSmall">
+                <Border Height="{StaticResource ThumbnailItemHeightSmall}" Width="{StaticResource ThumbnailItemWidthSmall}" Background="Transparent">
+                    <Grid Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5 10 15" Width="70" Height="100" Fill="White"
+                               Visibility="{Binding HasThumbnail, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
+                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" Margin="0 0 0 15" Source="{Binding Thumbnail}"/>
+                        <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="#DD666666" BorderBrush="White" BorderThickness="0">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5 10 5" Foreground="White" FontSize="16" Text="{Binding PageNumber}"/>
+                        </Border>
+                        <Path StrokeThickness="1" Fill="#FF21578A" Stroke="White" StrokeLineJoin="Miter" Data="M 18,0 L 18,30 L 9,39 L 0,30 L 0,0"
+                          HorizontalAlignment="Right" Margin="0 0 10 0" Visibility="{Binding IsCurrentPage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <Style x:Key="ThumbnailListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource TagListViewItemStyle}">
+                <Setter Property="Tag">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource SecondaryHighlightDarkColor}"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="BackgroundGrid">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border BorderBrush="White" BorderThickness="0 0 0 3" Margin="0 10 0 0">
+            <Grid>
+            
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button HorizontalAlignment="Left" Content="Exit%" x:Uid="pdftron_Controls_ThumbnailsView_Exit" Command="{Binding CloseCommand}"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            Visibility="{Binding HasSelectedItems, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock FontSize="20" Text="Selected:%" x:Uid="pdftron_Controls_ThumbnailsView_SelectedLabel" />
+                    <TextBlock FontSize="20" Text="{Binding NumberOfSelectedItems}" Margin="5 0 0 0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal"
+                            Visibility="{Binding HasSelectedItems, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Button Content="ClearSelection%" x:Uid="pdftron_Controls_ThumbnailsView_ClearSelection" Command="{Binding ClearSelectionCommand}"/>
+                    <Grid Width="25"/>
+                    <Button Content="Delete%" x:Uid="pdftron_Controls_ThumbnailsView_Delete" Command="{Binding DeleteCommand}"/>
+                </StackPanel>
+            
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <ListView x:Name="MainListView"
+                  ItemTemplate="{StaticResource ThumbnailTemplateSmall}"
+                  ItemContainerStyle="{StaticResource ThumbnailListViewItemStyle}"   
+                  ItemsSource="{Binding ThumbnailsList, Mode=TwoWay}"
+                  CanReorderItems="{Binding IsInEditMode}"
+                  CanDragItems="{Binding IsInEditMode}"
+                  AllowDrop="{Binding IsInEditMode}"
+                  SelectionMode="{Binding SelectionMode}"
+                  IsItemClickEnabled="True"
+                  common:SelectionChangedCommand.Command="{Binding SelectionChangedCommand}"
+                  common:ItemClickCommand.Command="{Binding ItemClickCommand}"
+                  Visibility="Visible"
+                  >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

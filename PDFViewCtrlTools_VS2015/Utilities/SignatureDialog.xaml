@@ -1,0 +1,58 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.SignatureDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="600">
+    
+    <Grid Background="{ThemeResource ContentDialogBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid x:Name="EditGrid" Margin="10" Visibility="Collapsed">
+            <StackPanel x:Name="RightEditingStack" Orientation="Horizontal">
+                
+            </StackPanel>
+            <StackPanel x:Name="LeftEditingStack" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Thickness"/>
+                <Button Content="Color"/>
+            </StackPanel>
+        </Grid>
+        
+
+        <Grid x:Name="SigningArea" Margin="20" Background="White" Grid.Row="1">
+
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="200" Margin="10">
+                <Rectangle Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="2" IsHitTestVisible="False"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Uid="pdftron_Tool_SignatureDialog_SignHere" Text="Sign Here" Foreground="Black" Margin="0 0 0 5" FontSize="14"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" x:Name="OptionsGrid" Margin="10 0 10 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel x:Name="LeftSideOptionsStack" Orientation="Horizontal">
+                <Button x:Uid="pdftron_Tool_SignatureDialog_Cancel" Content="Cancel" Click="CancelButton_Clicked"/>
+                <CheckBox x:Name="MakeDefaultCheckBox" x:Uid="pdftron_Tool_SignatureDialog_MakeDefaultSignature_CheckBox" Content="Make Default Signature" Margin="20,6,0,5"/>
+                <Button x:Name="UseDefaultButton" Visibility="Collapsed" x:Uid="pdftron_Tool_SignatureDialog_UseMySignature" Content="" Click="UseDefaultButton_Click"/>
+            </StackPanel>
+
+            <StackPanel x:Name="RightSideOptionsStack" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Uid="pdftron_Tool_SignatureDialog_Clear" Content="Clear" Click="ClearButton_Clicked"/>
+                <Grid Width="10"/>
+                <Button x:Uid="pdftron_Tool_SignatureDialog_AddSignature" Content="Add Signature" Click="AddSignatureButton_Clicked" />
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

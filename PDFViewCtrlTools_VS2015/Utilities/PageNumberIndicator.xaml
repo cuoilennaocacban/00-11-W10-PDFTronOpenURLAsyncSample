@@ -1,0 +1,72 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.Utilities.PageNumberIndicator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Utilities"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <UserControl.Resources>
+
+        <Style TargetType="Border" x:Key="PageNumberIndicatorBorderStyle">
+            <Setter Property="Background" Value="#CC222222"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="LargeBorderStyle" BasedOn="{StaticResource PageNumberIndicatorBorderStyle}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="SmallBorderStyle" BasedOn="{StaticResource PageNumberIndicatorBorderStyle}">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="PageNumberIndicatorTextBlockStyle">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="LargeTextBlockStyle" BasedOn="{StaticResource PageNumberIndicatorTextBlockStyle}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="8"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="SmallTextBlockStyle" BasedOn="{StaticResource PageNumberIndicatorTextBlockStyle}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+
+        <Storyboard x:Name="FadeIn">
+            <DoubleAnimation Duration="0:0:0.500" Storyboard.TargetName="MainBorder" 
+                             Storyboard.TargetProperty="Opacity" To="1" Completed="FadeInCompleted">
+                <DoubleAnimation.EasingFunction>
+                    <QuarticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Name="FadeOut">
+            <DoubleAnimation Duration="0:0:0.500" Storyboard.TargetName="MainBorder" 
+                             Storyboard.TargetProperty="Opacity" To="0" Completed="FadeOutCompleted">
+                <DoubleAnimation.EasingFunction>
+                    <QuarticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+    </UserControl.Resources>
+    
+        
+    <Grid>
+        <Border x:Name="MainBorder" Style="{StaticResource SmallBorderStyle}">
+            <TextBlock x:Name="PageText" Style="{StaticResource SmallTextBlockStyle}" Text="25 of 1654"/>
+        </Border>
+        
+
+        
+        
+    </Grid>
+</UserControl>

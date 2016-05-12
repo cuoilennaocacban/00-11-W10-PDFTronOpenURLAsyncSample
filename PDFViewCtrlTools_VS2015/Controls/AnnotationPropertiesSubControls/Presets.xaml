@@ -1,0 +1,125 @@
+﻿<UserControl
+    x:Class="pdftron.PDF.Tools.Controls.AnnotationPropertiesSubControls.Presets"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pdftron.PDF.Tools.Controls.AnnotationPropertiesSubControls"
+    xmlns:converters="using:pdftron.PDF.Tools.Controls.ViewModels.Common"
+    xmlns:resources="using:pdftron.PDF.Tools.Controls.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/ControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:EnumToStyleConverter 
+                x:Key="EnumtoStyleCoverter" MatchedStyle="{StaticResource MatchedSecondaryTabButtonStyle}" 
+                NotMatchedStyle="{StaticResource NonMatchedSecondaryTabButtonStyle}"/>
+            <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:DoubleToPointLabelConverter x:Key="DoubleToPointLabelConverter" DecimalPlaces="0"/>
+            <converters:RatioToPercentageLabelConverter x:Key="RatioToPercentageLabelConverter"/>
+            
+            <Style TargetType="TextBlock" x:Key="PropertyIconTextBlockStyle">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Visibility="{Binding HasSecondaryColor, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border BorderThickness="0 0 0 0" BorderBrush="{StaticResource MatchedTabButtonBackgroundColor}">
+                <Grid Margin="4 0 4 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <resources:TabButton Style="{Binding PresetColorTarget, Converter={StaticResource EnumtoStyleCoverter}, ConverterParameter=primary}"
+                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18"
+                                         FontFamily="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons" Content="{Binding PrimaryColorTypeIcon}"
+                                         Command="{Binding PresetColorTargetCommand}" CommandParameter="primary"/>
+                    <resources:TabButton Style="{Binding PresetColorTarget, Converter={StaticResource EnumtoStyleCoverter}, ConverterParameter=secondary}"
+                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" FontSize="18" Padding="0 0 2 0"
+                                         FontFamily="ms-appx:///pdftron.PDF.Tools/Controls/Resources/custom.ttf#PDFTron Glyphicons" Content="&#x005D;" 
+                                         Command="{Binding PresetColorTargetCommand}" CommandParameter="secondary"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" MinWidth="20">
+            <Grid Visibility="{Binding PresetColorTarget, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=primary}">
+                <local:PresetColorGrid DataContext="{Binding PrimaryColorOption}" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid Visibility="{Binding PresetColorTarget, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter=secondary}">
+                <local:PresetColorGrid DataContext="{Binding SecondaryColorOption}" HorizontalAlignment="Center"/>
+            </Grid>
+        </Grid>
+        
+        <Rectangle Grid.Row="2" Style="{StaticResource RegionSeparatorRectangleStyle}"/>
+        
+        
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.RowSpan="3">
+                <local:AnnotationPreviewControl HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="150"/>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding HasThickness, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="4">
+                    <local:ButtonControl DataContext="{Binding ThicknessButtonViewModel}"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0" Visibility="{Binding HasFontSize, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="4">
+                    <local:ButtonControl DataContext="{Binding FontSizeButtonViewModel}"/>
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="0" Visibility="{Binding HasOpacity, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="4">
+                    <local:ButtonControl DataContext="{Binding OpacityButtonViewModel}"/>
+                </Grid>
+
+                <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" FontSize="14" Foreground="Black"
+                           Text="{Binding Thickness, Converter={StaticResource DoubleToPointLabelConverter}}"
+                           Visibility="{Binding HasThickness, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" FontSize="14" Foreground="Black"
+                           Text="{Binding FontSize}"
+                           Visibility="{Binding HasFontSize, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" FontSize="14" Foreground="Black"
+                           Text="{Binding Opacity, Converter={StaticResource RatioToPercentageLabelConverter}}"
+                           Visibility="{Binding HasOpacity, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
+        </Grid>
+
+        <Rectangle Style="{StaticResource RegionSeparatorRectangleStyle}" Grid.Row="4"/>
+
+    </Grid>
+</UserControl>
