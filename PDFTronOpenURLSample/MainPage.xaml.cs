@@ -24,10 +24,7 @@ namespace PDFTronOpenURLSample
             PDFNet.Initialize();
             PDFViewCtrl viewCtrl = new PDFViewCtrl();
             MainBorder.Child = viewCtrl;
-
-            //await MainIssue.MainPdfViewCtrl.OpenURLAsync(MainIssue.IssueContent.FullPdf, "", MainIssue.PdfPassword());
-            //MainBorder.Child = MainIssue.MainPdfViewCtrl;
-
+            
             viewCtrl.SetDrawAnnotations(false);
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.System.MemoryManager"))
             {
@@ -42,8 +39,7 @@ namespace PDFTronOpenURLSample
                 TextMarkupAdobeHack = true,
                 IsPopupMenuEnabled = false
             };
-
-            //await MainIssue.MainPdfViewCtrl.OpenURLAsync(MainIssue.IssueContent.FullPdf);
+            
             await viewCtrl.OpenURLAsync("https://www.math.ucdavis.edu/~linear/linear.pdf");
         }
     }
