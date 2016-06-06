@@ -130,15 +130,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="PDFTron.PDFNetWindows10Universal, Version=6.5.3.42683">
-      <Name>PDFNet for Windows 10 Universal Apps</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\PDFViewCtrlTools_VS2015\PDFViewCtrlTools_VS2015.csproj">
       <Project>{25f47cba-47f3-4011-afa7-ce8d9b704648}</Project>
       <Name>PDFViewCtrlTools_VS2015</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="PDFTron.PDFNetWindows10Universal, Version=6.5.3.45026">
+      <Name>PDFNet for Windows 10 Universal Apps</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -23,6 +23,10 @@ namespace PDFTronOpenURLSample
         {
             PDFNet.Initialize();
             PDFViewCtrl viewCtrl = new PDFViewCtrl();
+
+            viewCtrl.SetPagePresentationMode(PDFViewCtrlPagePresentationMode.e_facing_cover);
+            viewCtrl.FlowDirection = FlowDirection.RightToLeft;
+
             MainBorder.Child = viewCtrl;
             
             viewCtrl.SetDrawAnnotations(false);

@@ -247,7 +247,7 @@
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
       <Name>Microsoft Visual C++ 2015 Runtime Package for Windows Universal</Name>
     </SDKReference>
-    <SDKReference Include="PDFTron.PDFNetWindows10Universal, Version=6.5.3.42683">
+    <SDKReference Include="PDFTron.PDFNetWindows10Universal, Version=6.5.3.45026">
       <Name>PDFNet for Windows 10 Universal Apps</Name>
     </SDKReference>
   </ItemGroup>
