@@ -136,8 +136,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="PDFTron.PDFNetWindows10Universal, Version=6.5.3.45026">
-      <Name>PDFNet for Windows 10 Universal Apps</Name>
+    <SDKReference Include="PDFTron.PDFNetUWPApps, Version=6.5.4.47152">
+      <Name>PDFNet SDK for UWP</Name>
     </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
