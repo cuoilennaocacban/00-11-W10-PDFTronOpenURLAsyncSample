@@ -25,7 +25,8 @@ namespace PDFTronOpenURLSample
             PDFViewCtrl viewCtrl = new PDFViewCtrl();
 
             viewCtrl.SetPagePresentationMode(PDFViewCtrlPagePresentationMode.e_facing_cover);
-            viewCtrl.FlowDirection = FlowDirection.RightToLeft;
+            viewCtrl.FlowDirection = FlowDirection.LeftToRight;
+            viewCtrl.AnimateAllPageFlipping = true;
 
             MainBorder.Child = viewCtrl;
             
