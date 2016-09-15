@@ -28,7 +28,7 @@ namespace PDFTronOpenURLSample
             viewCtrl.FlowDirection = FlowDirection.LeftToRight;
             viewCtrl.AnimateAllPageFlipping = true;
 
-            MainBorder.Child = viewCtrl;
+            //MainBorder.Child = viewCtrl;
             
             viewCtrl.SetDrawAnnotations(false);
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.System.MemoryManager"))
